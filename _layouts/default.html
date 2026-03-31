@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Andrew's Webpage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #333;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+        }
+        nav a {
+            color: white;
+            margin-right: 20px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Page Layout */
+        .container {
+            padding: 40px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        }
+
+        .section img {
+            width: 50px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        h2 {
+            display: flex;
+            align-items: center;
+            color: #444;
+        }
+
+        ul {
+            list-style-type: square;
+        }
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#school">School</a>
+        <a href="#minecraft">Minecraft</a>
+        <a href="#gaming">Gaming</a>
+    </nav>
+
+    <div class="container">
+        <h1>Andrew's Webpage</h1>
+
+        <!-- School Section -->
+        <div class="section" id="school">
+            <h2>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/School_icon.svg" alt="School Icon">
+                School Resources
+            </h2>
+            <ul>
+                <li><a href="https://www.savvasrealize.com" target="_blank">Savvas Realize</a></li>
+                <li><a href="https://launchpad.classlink.com" target="_blank">ClassLink</a></li>
+            </ul>
+        </div>
+
+        <!-- Minecraft Section -->
+        <div class="section" id="minecraft">
+            <h2>
+                <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png" alt="Minecraft Icon">
+                Minecraft
+            </h2>
+            <ul>
+                <li><a href="https://www.minecraft.net" target="_blank">Official Minecraft Website</a></li>
+                <li><a href="https://www.curseforge.com/minecraft" target="_blank">Minecraft Mods (CurseForge)</a></li>
+                <li><a href="https://minecraft.fandom.com/wiki/Minecraft_Wiki" target="_blank">Minecraft Wiki</a></li>
+            </ul>
+        </div>
+
+        <!-- Gaming Section -->
+        <div class="section" id="gaming">
+            <h2>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Video-Game-Controller-Icon.svg" alt="Gaming Icon">
+                Gaming
+            </h2>
+            <ul>
+                <li><a href="https://www.nintendo.com/switch/" target="_blank">Nintendo Switch 2 Info</a></li>
+                <li><a href="https://www.pcgamingwiki.com" target="_blank">PC Gaming Resources</a></li>
+                <li><a href="https://www.playstation.com/ps5/" target="_blank">PlayStation 5</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+</html>
