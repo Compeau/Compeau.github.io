@@ -5,909 +5,319 @@
   <title>20 Questions: Video Game Guesser</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    :root {
-      --bg: #050816;
-      --card-bg: #111827;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.15);
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --danger: #f97373;
-      --success: #4ade80;
-      --radius: 12px;
-      --shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
-      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
-      min-height: 100vh;
-      font-family: var(--font-main);
-      background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
-      color: var(--text);
+      background: #0b0f19;
+      color: #e5e7eb;
+      font-family: system-ui, sans-serif;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 20px;
     }
-
     .app {
       width: 100%;
-      max-width: 720px;
-      background: linear-gradient(145deg, #020617, #020617 40%, #0b1120 100%);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(148, 163, 184, 0.25);
-      padding: 24px 24px 20px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .app::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.18), transparent 55%),
-        radial-gradient(circle at 100% 0%, rgba(129, 140, 248, 0.18), transparent 55%);
-      opacity: 0.7;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .title-block {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    h1 {
-      font-size: 1.4rem;
-      margin: 0;
-      letter-spacing: 0.03em;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    h1 span.logo-chip {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 0, #facc15, #f97316 55%, #b91c1c 100%);
-      color: #020617;
-      font-weight: 800;
-      font-size: 0.9rem;
-      box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.9), 0 10px 25px rgba(0, 0, 0, 0.6);
-    }
-
-    .subtitle {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      justify-content: flex-end;
-    }
-
-    .pill {
-      font-size: 0.7rem;
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      color: var(--muted);
-      background: rgba(15, 23, 42, 0.9);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .pill strong {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    main {
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), #020617 55%);
-      border-radius: 18px;
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      padding: 18px 18px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .status-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .status-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
-    }
-
-    .status-right {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .status-chip {
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .status-chip span.label {
-      color: var(--muted);
-      font-size: 0.7rem;
-    }
-
-    .status-chip span.value {
-      color: var(--accent);
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    .question-card {
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617 60%);
+      max-width: 800px;
+      background: #111827;
       border-radius: 16px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      padding: 16px 16px 14px;
-      position: relative;
-      overflow: hidden;
+      padding: 20px;
+      border: 1px solid #1f2937;
     }
-
-    .question-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.18), transparent 55%),
-        radial-gradient(circle at 100% 0%, rgba(129, 140, 248, 0.18), transparent 55%);
-      opacity: 0.4;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .question-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .question-label span.dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.35);
-    }
-
-    .question-text {
-      font-size: 1.05rem;
-      line-height: 1.5;
-      margin-bottom: 4px;
-    }
-
-    .question-sub {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .guess-text {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .guess-sub {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .guess-title {
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .controls {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .primary-buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
+    h1 { margin-top: 0; }
     button {
+      padding: 10px 18px;
+      border-radius: 8px;
       border: none;
       cursor: pointer;
-      font-family: inherit;
-      font-size: 0.95rem;
-      border-radius: 999px;
-      padding: 9px 18px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.12s ease, border-color 0.12s ease;
-      white-space: nowrap;
+      font-size: 16px;
     }
-
-    button:active {
-      transform: translateY(1px) scale(0.99);
-      box-shadow: none;
+    .yes { background: #4ade80; }
+    .no { background: #f87171; }
+    .restart { background: #1f2937; color: #e5e7eb; }
+    .question-box {
+      background: #1f2937;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 16px;
     }
-
-    .btn-yes {
-      background: radial-gradient(circle at 30% 0, #4ade80, #16a34a 60%, #166534 100%);
-      color: #022c22;
-      font-weight: 600;
-      box-shadow: 0 10px 25px rgba(22, 163, 74, 0.45);
-      border: 1px solid rgba(22, 163, 74, 0.9);
-    }
-
-    .btn-no {
-      background: radial-gradient(circle at 30% 0, #f97373, #ef4444 60%, #991b1b 100%);
-      color: #fef2f2;
-      font-weight: 600;
-      box-shadow: 0 10px 25px rgba(239, 68, 68, 0.45);
-      border: 1px solid rgba(239, 68, 68, 0.9);
-    }
-
-    .btn-secondary {
-      background: rgba(15, 23, 42, 0.95);
-      color: var(--muted);
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      font-size: 0.8rem;
-      padding: 7px 13px;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(15, 23, 42, 1);
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .btn-yes:hover {
-      filter: brightness(1.05);
-    }
-
-    .btn-no:hover {
-      filter: brightness(1.05);
-    }
-
-    .meta-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .meta-left {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .meta-pill {
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-    }
-
-    .meta-right {
-      text-align: right;
-      font-size: 0.7rem;
-    }
-
-    .meta-right span {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .guess-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 6px;
-      flex-wrap: wrap;
-    }
-
-    .btn-small {
-      font-size: 0.75rem;
-      padding: 5px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.95);
-      color: var(--muted);
-      cursor: pointer;
-    }
-
-    .btn-small:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .stats-pill {
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-    }
-
-    @media (max-width: 600px) {
-      .app {
-        padding: 18px 16px 16px;
-        border-radius: 18px;
-      }
-      main {
-        padding: 14px 12px 12px;
-      }
-      .question-card {
-        padding: 12px 12px 10px;
-      }
-      h1 {
-        font-size: 1.2rem;
-      }
-      .question-text {
-        font-size: 1rem;
-      }
-      .controls {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .primary-buttons {
-        width: 100%;
-      }
-      .primary-buttons button {
-        flex: 1;
-      }
-      .status-row {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .status-right {
-        justify-content: flex-start;
-      }
-      .meta-row {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .meta-right {
-        text-align: left;
-      }
-    }
+    .hidden { display: none; }
   </style>
 </head>
 <body>
-  <div class="app">
-    <header>
-      <div class="title-block">
-        <h1>
-          <span class="logo-chip">VG</span>
-          20 Questions: Video Game Guesser
-        </h1>
-        <div class="subtitle">
-          Think of a video game. I’ll try to guess it in 20 yes/no questions or less.
-        </div>
-      </div>
-      <div class="pill-row">
-        <div class="pill"><strong>Domain:</strong> Video games only</div>
-        <div class="pill"><strong>Mode:</strong> Yes / No</div>
-      </div>
-    </header>
 
-    <main>
-      <div class="status-row">
-        <div class="status-left">
-          <div class="status-dot"></div>
-          <div id="status-text">Waiting to start</div>
-        </div>
-        <div class="status-right">
-          <div class="status-chip">
-            <span class="label">Question</span>
-            <span class="value" id="question-count">0 / 20</span>
-          </div>
-          <div class="status-chip">
-            <span class="label">Candidates</span>
-            <span class="value" id="candidate-count">–</span>
-          </div>
-        </div>
-      </div>
+<div class="app">
+  <h1>20 Questions: Video Game Guesser</h1>
+  <p>Think of a video game. I’ll try to guess it in 20 questions.</p>
 
-      <div class="question-card" id="question-card">
-        <div class="question-label">
-          <span class="dot"></span>
-          <span id="question-label-text">Warm‑up</span>
-        </div>
-        <div class="question-text" id="question-text">
-          Think of a video game you know well, then click “Start Game” below.
-        </div>
-        <div class="question-sub" id="question-sub">
-          I’ll ask you up to 20 yes/no questions to narrow it down.
-        </div>
-
-        <div id="guess-section" class="hidden">
-          <div class="guess-text">
-            I think your game is: <span class="guess-title" id="guess-title"></span>
-          </div>
-          <div class="guess-sub" id="guess-sub">
-            Am I right? If not, you can tell me I was wrong and restart.
-          </div>
-          <div class="guess-actions">
-            <button class="btn-small" id="btn-guess-correct">Yes, that’s my game</button>
-            <button class="btn-small" id="btn-guess-wrong">No, that’s wrong</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="controls">
-        <div class="primary-buttons">
-          <button class="btn-yes" id="btn-yes">Yes</button>
-          <button class="btn-no" id="btn-no">No</button>
-        </div>
-        <button class="btn-secondary" id="btn-restart">Start / Restart</button>
-      </div>
-
-      <div class="meta-row">
-        <div class="meta-left">
-          <div class="meta-pill" id="meta-hint">
-            Tip: Stick to well‑known console/PC titles for best results.
-          </div>
-          <div class="stats-pill" id="stats-pill">
-            Sessions: <span id="stat-sessions">0</span> ·
-            Correct: <span id="stat-correct">0</span> ·
-            Misses: <span id="stat-misses">0</span>
-          </div>
-        </div>
-        <div class="meta-right">
-          Knowledge base: <span id="kb-size">–</span> games ·
-          Attributes: <span id="attr-size">–</span>
-        </div>
-      </div>
-    </main>
+  <div class="question-box">
+    <div id="question-label" style="opacity:0.7; font-size:14px;">Warm‑up</div>
+    <div id="question-text" style="font-size:20px; margin-top:6px;">
+      Click “Start” to begin.
+    </div>
+    <div id="guess-box" class="hidden" style="margin-top:12px;">
+      <strong>I think your game is:</strong>
+      <div id="guess-title" style="font-size:22px; color:#38bdf8; margin-top:4px;"></div>
+    </div>
   </div>
 
-  <script>
-    // --- Question definitions (same for all sessions) ---
-    const QUESTIONS = [
-      {
-        id: "year_2010",
-        text: "Was your game first released after 2010?",
-        label: "Release window",
-        predicate: game => game.year > 2010
-      },
-      {
-        id: "multiplayer",
-        text: "Does your game have a multiplayer mode?",
-        label: "Multiplayer",
-        predicate: game => game.multiplayer
-      },
-      {
-        id: "online",
-        text: "Does your game support online play?",
-        label: "Online features",
-        predicate: game => game.online
-      },
-      {
-        id: "nintendo",
-        text: "Is your game available on a Nintendo system?",
-        label: "Platform family",
-        predicate: game => game.nintendo
-      },
-      {
-        id: "playstation",
-        text: "Is your game available on a PlayStation system?",
-        label: "Platform family",
-        predicate: game => game.playstation
-      },
-      {
-        id: "xbox",
-        text: "Is your game available on an Xbox system?",
-        label: "Platform family",
-        predicate: game => game.xbox
-      },
-      {
-        id: "pc",
-        text: "Is your game available on PC?",
-        label: "Platform family",
-        predicate: game => game.pc
-      },
-      {
-        id: "indie",
-        text: "Is your game generally considered an indie game?",
-        label: "Production scale",
-        predicate: game => game.indie
-      },
-      {
-        id: "pixel_art",
-        text: "Does your game use a pixel-art visual style?",
-        label: "Art style",
-        predicate: game => game.pixel_art
-      },
-      {
-        id: "2d",
-        text: "Is your game primarily played in 2D?",
-        label: "Dimension",
-        predicate: game => game["2d"]
-      },
-      {
-        id: "open_world",
-        text: "Is your game primarily open-world?",
-        label: "World structure",
-        predicate: game => game.open_world
-      },
-      {
-        id: "shooter",
-        text: "Is shooting a core part of the gameplay?",
-        label: "Combat focus",
-        predicate: game => game.shooter
-      },
-      {
-        id: "horror",
-        text: "Does your game strongly lean into horror elements?",
-        label: "Tone",
-        predicate: game => game.horror
-      },
-      {
-        id: "rpg",
-        text: "Does your game have strong RPG elements (stats, leveling, builds)?",
-        label: "RPG elements",
-        predicate: game => game.rpg
-      },
-      {
-        id: "puzzle_focus",
-        text: "Is your game primarily focused on puzzle solving?",
-        label: "Puzzle focus",
-        predicate: game => game.puzzle_focus
-      },
-      {
-        id: "first_person",
-        text: "Is your game played mostly from a first-person perspective?",
-        label: "Camera",
-        predicate: game => game.perspective === "first-person"
-      },
-      {
-        id: "third_person",
-        text: "Is your game played mostly from a third-person perspective?",
-        label: "Camera",
-        predicate: game => game.perspective === "third-person"
-      },
-      {
-        id: "retro_style",
-        text: "Does your game intentionally feel retro or old-school?",
-        label: "Aesthetic",
-        predicate: game => game.retro_style
-      }
-    ];
+  <div style="display:flex; gap:10px; margin-bottom:10px;">
+    <button class="yes" id="btn-yes">Yes</button>
+    <button class="no" id="btn-no">No</button>
+    <button class="restart" id="btn-restart">Start / Restart</button>
+  </div>
 
-    const MAX_QUESTIONS = 20;
+  <div style="opacity:0.7; font-size:14px;">
+    Question <span id="qcount">0</span> / 20  
+    • Candidates: <span id="ccount">–</span>
+  </div>
+</div>
 
-    // State
-    let ALL_GAMES = [];
-    let remainingGames = [];
-    let askedQuestionIds = new Set();
-    let questionCount = 0;
-    let gameActive = false;
-    let currentQuestion = null;
-    let lastGuess = null;
+<script>
+/* ============================================================
+   LOAD DATASET
+============================================================ */
+let ALL_GAMES = [];
 
-    // Persistence (localStorage)
-    const STATS_KEY = "vg20q_stats";
+async function loadGames() {
+  const res = await fetch("games.json");
+  ALL_GAMES = await res.json();
+  document.getElementById("ccount").textContent = ALL_GAMES.length;
+}
+loadGames();
 
-    function loadStats() {
-      try {
-        const raw = localStorage.getItem(STATS_KEY);
-        if (!raw) {
-          return { sessions: 0, correct: 0, misses: 0 };
-        }
-        const parsed = JSON.parse(raw);
-        return {
-          sessions: parsed.sessions || 0,
-          correct: parsed.correct || 0,
-          misses: parsed.misses || 0
-        };
-      } catch {
-        return { sessions: 0, correct: 0, misses: 0 };
-      }
+/* ============================================================
+   GAME STATE
+============================================================ */
+const MAX_Q = 20;
+let remaining = [];
+let asked = new Set();
+let qcount = 0;
+let currentQ = null;
+
+/* ============================================================
+   HIGH‑DEPTH QUESTION SET (20 QUESTIONS)
+   These are tuned for Option‑B schema.
+============================================================ */
+const QUESTIONS = [
+  {
+    id: "genre_fps",
+    label: "Genre",
+    text: "Is your game primarily a first-person shooter?",
+    pred: g => g.genre === "fps" || g.subgenre.includes("shooter") || g.tags.includes("shooter")
+  },
+  {
+    id: "genre_rpg",
+    label: "Genre",
+    text: "Does your game have strong RPG elements?",
+    pred: g => g.genre.includes("rpg") || g.tags.includes("soulslike") || g.tags.includes("fantasy")
+  },
+  {
+    id: "genre_platformer",
+    label: "Genre",
+    text: "Is your game a platformer?",
+    pred: g => g.genre === "platformer" || g.tags.includes("platformer")
+  },
+  {
+    id: "sub_openworld",
+    label: "World",
+    text: "Is your game open-world?",
+    pred: g => g.subgenre.includes("open-world") || g.tags.includes("open-world")
+  },
+  {
+    id: "perspective_fp",
+    label: "Perspective",
+    text: "Is your game played from a first-person perspective?",
+    pred: g => g.perspective === "first-person"
+  },
+  {
+    id: "perspective_tp",
+    label: "Perspective",
+    text: "Is your game played from a third-person perspective?",
+    pred: g => g.perspective === "third-person"
+  },
+  {
+    id: "multiplayer",
+    label: "Multiplayer",
+    text: "Does your game support multiplayer?",
+    pred: g => g.multiplayer
+  },
+  {
+    id: "online",
+    label: "Online",
+    text: "Does your game support online play?",
+    pred: g => g.online
+  },
+  {
+    id: "coop",
+    label: "Co-op",
+    text: "Does your game support co-op gameplay?",
+    pred: g => g.coop
+  },
+  {
+    id: "indie",
+    label: "Production",
+    text: "Is your game considered an indie game?",
+    pred: g => g.tags.includes("indie")
+  },
+  {
+    id: "horror",
+    label: "Tone",
+    text: "Does your game include horror elements?",
+    pred: g => g.tags.includes("horror")
+  },
+  {
+    id: "fantasy",
+    label: "Tone",
+    text: "Is your game set in a fantasy world?",
+    pred: g => g.tags.includes("fantasy")
+  },
+  {
+    id: "scifi",
+    label: "Tone",
+    text: "Is your game science-fiction themed?",
+    pred: g => g.tags.includes("sci-fi")
+  },
+  {
+    id: "metacritic90",
+    label: "Critical acclaim",
+    text: "Does your game have a Metacritic score above 90?",
+    pred: g => g.metacritic >= 90
+  },
+  {
+    id: "year_recent",
+    label: "Release",
+    text: "Was your game released after 2015?",
+    pred: g => g.year > 2015
+  },
+  {
+    id: "year_old",
+    label: "Release",
+    text: "Was your game released before 2005?",
+    pred: g => g.year < 2005
+  },
+  {
+    id: "gen8plus",
+    label: "Console generation",
+    text: "Is your game primarily from console generation 8 or newer?",
+    pred: g => g.console_generation >= 8
+  },
+  {
+    id: "long_campaign",
+    label: "Length",
+    text: "Does your game have a long campaign (over 30 hours)?",
+    pred: g => g.campaign_length_hours >= 30
+  },
+  {
+    id: "popular",
+    label: "Popularity",
+    text: "Is your game among the top 200 best-selling games?",
+    pred: g => g.best_seller_rank <= 200
+  },
+  {
+    id: "publisher_nintendo",
+    label: "Publisher",
+    text: "Was your game published by Nintendo?",
+    pred: g => g.publisher === "Nintendo"
+  }
+];
+
+/* ============================================================
+   ENTROPY‑BASED QUESTION SELECTION
+============================================================ */
+function entropy(p) {
+  if (p <= 0 || p >= 1) return 0;
+  return -p * Math.log2(p) - (1 - p) * Math.log2(1 - p);
+}
+
+function chooseBestQuestion() {
+  let best = null;
+  let bestScore = -Infinity;
+
+  for (const q of QUESTIONS) {
+    if (asked.has(q.id)) continue;
+
+    let yes = 0, no = 0;
+    for (const g of remaining) {
+      if (q.pred(g)) yes++; else no++;
     }
+    if (yes === 0 || no === 0) continue;
 
-    function saveStats(stats) {
-      localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+    const p = yes / (yes + no);
+    const score = entropy(p);
+    if (score > bestScore) {
+      bestScore = score;
+      best = q;
     }
+  }
+  return best;
+}
 
-    function updateStatsUI() {
-      const stats = loadStats();
-      document.getElementById("stat-sessions").textContent = stats.sessions;
-      document.getElementById("stat-correct").textContent = stats.correct;
-      document.getElementById("stat-misses").textContent = stats.misses;
-    }
+/* ============================================================
+   GAME LOOP
+============================================================ */
+function askNext() {
+  document.getElementById("qcount").textContent = qcount;
+  document.getElementById("ccount").textContent = remaining.length;
 
-    // DOM
-    const questionTextEl = document.getElementById("question-text");
-    const questionSubEl = document.getElementById("question-sub");
-    const questionLabelTextEl = document.getElementById("question-label-text");
-    const questionCountEl = document.getElementById("question-count");
-    const candidateCountEl = document.getElementById("candidate-count");
-    const kbSizeEl = document.getElementById("kb-size");
-    const attrSizeEl = document.getElementById("attr-size");
-    const btnYes = document.getElementById("btn-yes");
-    const btnNo = document.getElementById("btn-no");
-    const btnRestart = document.getElementById("btn-restart");
-    const guessSection = document.getElementById("guess-section");
-    const guessTitleEl = document.getElementById("guess-title");
-    const metaHintEl = document.getElementById("meta-hint");
-    const statusTextEl = document.getElementById("status-text");
-    const btnGuessCorrect = document.getElementById("btn-guess-correct");
-    const btnGuessWrong = document.getElementById("btn-guess-wrong");
+  if (remaining.length === 0) {
+    showGuess("No matching game found");
+    return;
+  }
 
-    // Info gain helpers
-    function entropy(p) {
-      if (p <= 0 || p >= 1) return 0;
-      return -p * Math.log2(p) - (1 - p) * Math.log2(1 - p);
-    }
+  if (remaining.length === 1 || qcount >= MAX_Q) {
+    showGuess(remaining[0].name);
+    return;
+  }
 
-    function chooseBestQuestion(games, askedIds) {
-      let bestQuestion = null;
-      let bestScore = -Infinity;
+  const q = chooseBestQuestion();
+  if (!q) {
+    showGuess(remaining[0].name);
+    return;
+  }
 
-      QUESTIONS.forEach(q => {
-        if (askedIds.has(q.id)) return;
+  currentQ = q;
+  document.getElementById("question-label").textContent = q.label;
+  document.getElementById("question-text").textContent = q.text;
+}
 
-        let yesCount = 0;
-        let noCount = 0;
+function showGuess(name) {
+  document.getElementById("guess-title").textContent = name;
+  document.getElementById("guess-box").classList.remove("hidden");
+  document.getElementById("question-label").textContent = "My guess";
+  document.getElementById("question-text").textContent = "";
+}
 
-        games.forEach(g => {
-          if (q.predicate(g)) yesCount++;
-          else noCount++;
-        });
+/* ============================================================
+   EVENT HANDLERS
+============================================================ */
+document.getElementById("btn-restart").onclick = () => {
+  remaining = [...ALL_GAMES];
+  asked.clear();
+  qcount = 1;
+  currentQ = QUESTIONS[0];
+  document.getElementById("guess-box").classList.add("hidden");
+  document.getElementById("question-label").textContent = currentQ.label;
+  document.getElementById("question-text").textContent = currentQ.text;
+  asked.add(currentQ.id);
+  document.getElementById("qcount").textContent = 1;
+  document.getElementById("ccount").textContent = remaining.length;
+};
 
-        const total = yesCount + noCount;
-        if (total === 0) return;
+document.getElementById("btn-yes").onclick = () => {
+  if (!currentQ) return;
+  remaining = remaining.filter(g => currentQ.pred(g));
+  asked.add(currentQ.id);
+  qcount++;
+  askNext();
+};
 
-        const pYes = yesCount / total;
-        const score = entropy(pYes);
+document.getElementById("btn-no").onclick = () => {
+  if (!currentQ) return;
+  remaining = remaining.filter(g => !currentQ.pred(g));
+  asked.add(currentQ.id);
+  qcount++;
+  askNext();
+};
+</script>
 
-        if (yesCount === 0 || noCount === 0) return;
-
-        if (score > bestScore) {
-          bestScore = score;
-          bestQuestion = q;
-        }
-      });
-
-      return bestQuestion;
-    }
-
-    function filterGames(games, question, answerYes) {
-      return games.filter(g => {
-        const result = question.predicate(g);
-        return answerYes ? result : !result;
-      });
-    }
-
-    function updateStatus() {
-      questionCountEl.textContent = `${questionCount} / ${MAX_QUESTIONS}`;
-      candidateCountEl.textContent = remainingGames.length.toString();
-    }
-
-    function setKnowledgeMeta() {
-      kbSizeEl.textContent = ALL_GAMES.length.toString();
-      attrSizeEl.textContent = QUESTIONS.length.toString();
-    }
-
-    function setButtonsEnabled(enabled) {
-      btnYes.disabled = !enabled;
-      btnNo.disabled = !enabled;
-      btnYes.style.opacity = enabled ? "1" : "0.5";
-      btnNo.style.opacity = enabled ? "1" : "0.5";
-      btnYes.style.cursor = enabled ? "pointer" : "default";
-      btnNo.style.cursor = enabled ? "pointer" : "default";
-    }
-
-    function showGuess(gameName, confident = true) {
-      lastGuess = gameName;
-      guessSection.classList.remove("hidden");
-      guessTitleEl.textContent = gameName;
-      questionLabelTextEl.textContent = "My guess";
-      questionTextEl.textContent = "";
-      questionSubEl.textContent = confident
-        ? "If I’m wrong, tap “No, that’s wrong” and I’ll log a miss."
-        : "I’m not fully certain, but this is my best guess from what you answered.";
-      setButtonsEnabled(false);
-      gameActive = false;
-      statusTextEl.textContent = "Waiting for your verdict";
-    }
-
-    function showNoCandidates() {
-      lastGuess = null;
-      guessSection.classList.remove("hidden");
-      guessTitleEl.textContent = "I couldn’t find a matching game.";
-      questionLabelTextEl.textContent = "Out of ideas";
-      questionTextEl.textContent = "";
-      questionSubEl.textContent =
-        "Either the game isn’t in my knowledge base yet, or some answers conflicted. Try again with a different game.";
-      setButtonsEnabled(false);
-      gameActive = false;
-      statusTextEl.textContent = "No candidates left";
-    }
-
-    function askNextQuestion() {
-      updateStatus();
-
-      if (remainingGames.length === 0) {
-        showNoCandidates();
-        return;
-      }
-
-      if (remainingGames.length === 1 || questionCount >= MAX_QUESTIONS) {
-        const candidate = remainingGames[0];
-        showGuess(candidate.name, remainingGames.length === 1);
-        return;
-      }
-
-      const nextQuestion = chooseBestQuestion(remainingGames, askedQuestionIds);
-
-      if (!nextQuestion) {
-        const candidate = remainingGames[0];
-        showGuess(candidate.name, false);
-        return;
-      }
-
-      guessSection.classList.add("hidden");
-      questionLabelTextEl.textContent = nextQuestion.label;
-      questionTextEl.textContent = nextQuestion.text;
-      questionSubEl.textContent = "Tap Yes or No based on the game you’re thinking of.";
-      currentQuestion = nextQuestion;
-      statusTextEl.textContent = "Game in progress";
-    }
-
-    function restartGame() {
-      if (!ALL_GAMES.length) return;
-      const stats = loadStats();
-      stats.sessions += 1;
-      saveStats(stats);
-      updateStatsUI();
-
-      remainingGames = [...ALL_GAMES];
-      askedQuestionIds = new Set();
-      questionCount = 0;
-      gameActive = true;
-      guessSection.classList.add("hidden");
-      questionLabelTextEl.textContent = "Question 1";
-
-      const first = QUESTIONS.find(q => q.id === "year_2010") || QUESTIONS[0];
-      currentQuestion = first;
-      askedQuestionIds.add(first.id);
-      questionCount = 1;
-
-      questionTextEl.textContent = first.text;
-      questionSubEl.textContent = "If you’re not sure, answer with your best guess.";
-      updateStatus();
-      candidateCountEl.textContent = remainingGames.length.toString();
-      setButtonsEnabled(true);
-      metaHintEl.textContent =
-        "Answer as consistently as you can; I’ll narrow down the possibilities with each question.";
-      statusTextEl.textContent = "Game in progress";
-    }
-
-    // Events
-    btnRestart.addEventListener("click", () => {
-      restartGame();
-    });
-
-    btnYes.addEventListener("click", () => {
-      if (!gameActive || !currentQuestion) return;
-      remainingGames = filterGames(remainingGames, currentQuestion, true);
-      questionCount++;
-      askedQuestionIds.add(currentQuestion.id);
-      askNextQuestion();
-    });
-
-    btnNo.addEventListener("click", () => {
-      if (!gameActive || !currentQuestion) return;
-      remainingGames = filterGames(remainingGames, currentQuestion, false);
-      questionCount++;
-      askedQuestionIds.add(currentQuestion.id);
-      askNextQuestion();
-    });
-
-    btnGuessCorrect.addEventListener("click", () => {
-      const stats = loadStats();
-      stats.correct += 1;
-      saveStats(stats);
-      updateStatsUI();
-      statusTextEl.textContent = "Nice, I got it!";
-    });
-
-    btnGuessWrong.addEventListener("click", () => {
-      const stats = loadStats();
-      stats.misses += 1;
-      saveStats(stats);
-      updateStatsUI();
-      statusTextEl.textContent = "Miss logged. Try another game!";
-    });
-
-    // Load games.json
-    async function loadGames() {
-      try {
-        const res = await fetch("games.json");
-        const data = await res.json();
-        ALL_GAMES = data;
-        setKnowledgeMeta();
-        metaHintEl.textContent =
-          "Games loaded. Click Start / Restart, think of a game, and answer the questions.";
-      } catch (e) {
-        questionTextEl.textContent = "Could not load games.json.";
-        questionSubEl.textContent = "Make sure you’re serving this over HTTP (not file://) and that games.json is present.";
-        setButtonsEnabled(false);
-        statusTextEl.textContent = "Load error";
-      }
-    }
-
-    // Init
-    updateStatsUI();
-    setButtonsEnabled(false);
-    candidateCountEl.textContent = "–";
-    loadGames();
-  </script>
 </body>
 </html>
