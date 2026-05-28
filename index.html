@@ -29,7 +29,7 @@
             margin-bottom: 25px;
             font-size: 32px;
         }
-
+        
         .game-card {
             display: flex;
             align-items: center;
@@ -41,23 +41,27 @@
             color: white;
             transition: 0.25s ease;
         }
+        
+        .game-thumb {
+            height: 70px;
+            width: auto;
+            max-width: 90px; /* keeps layout consistent */
+            flex-shrink: 0;  /* prevents shrinking */
+            border-radius: 8px;
+            object-fit: contain;
+            margin-right: 15px;
+        }
+        
+        .game-title {
+            font-size: 20px;
+            font-weight: bold;
+            flex-grow: 1; /* ensures text stays aligned */
+        }
 
         .game-card:hover {
             background: rgba(255,255,255,0.22);
             transform: translateY(-4px) scale(1.02);
             box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-        }
-
-        .game-thumb {
-            height: 70px;
-            width: auto;
-            border-radius: 8px;
-            object-fit: contain;
-        }
-
-        .game-title {
-            font-size: 20px;
-            font-weight: bold;
         }
 
         /* Mobile responsive */
