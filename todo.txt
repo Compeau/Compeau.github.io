@@ -1,8 +1,0 @@
-
-add wii controls (analog stick and A button)
-tweak speed, etc
-add score to game over screen
-add replay button (maybe "press Y to replay")add sound for shot, comet explosion
-have both triggers and A button shoot
-shrink hit box, and make sure comets behind you don't trigger
-fix weird shooting/invisible comet bugs
