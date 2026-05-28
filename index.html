@@ -2,50 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Game Links</title>
+    <title>Game Collection</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #1e1e2f, #2d2d44);
             margin: 0;
-            padding: 0;
+            padding: 20px;
+            color: white;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: white;
         }
 
         .container {
+            max-width: 600px;
+            width: 100%;
             background: rgba(255, 255, 255, 0.08);
-            padding: 40px 50px;
-            border-radius: 12px;
-            text-align: center;
+            padding: 30px;
+            border-radius: 14px;
             box-shadow: 0 0 20px rgba(0,0,0,0.4);
             backdrop-filter: blur(6px);
         }
 
         h1 {
+            text-align: center;
             margin-bottom: 25px;
             font-size: 32px;
-            letter-spacing: 1px;
         }
 
-        .link-btn {
-            display: block;
-            margin: 12px 0;
-            padding: 14px 20px;
-            background: #4a90e2;
-            color: white;
+        .game-card {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.12);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 18px;
             text-decoration: none;
-            border-radius: 8px;
-            font-size: 18px;
-            transition: 0.2s;
+            color: white;
+            transition: 0.25s ease;
         }
 
-        .link-btn:hover {
-            background: #6bb3ff;
-            transform: translateY(-2px);
+        .game-card:hover {
+            background: rgba(255,255,255,0.22);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+        }
+
+        .game-thumb {
+            width: 70px;
+            height: 70px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .game-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 480px) {
+            .game-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .game-thumb {
+                margin: 0 0 10px 0;
+                width: 100%;
+                height: auto;
+            }
         }
     </style>
 </head>
@@ -54,9 +80,21 @@
     <div class="container">
         <h1>Game Collection</h1>
 
-        <a class="link-btn" href="./CometCrash/CometCrash.html">Comet Crash</a>
-        <a class="link-btn" href="./MineCrash/index.html">MineCrash</a>
-        <a class="link-btn" href="./RocketShooter/index.html">Rocket Shooter</a>
+        <a class="game-card" href="./CometCrash/CometCrash.html">
+            <img class="game-thumb" src="./CometCrash/ship.png" alt="Comet Crash">
+            <div class="game-title">Comet Crash</div>
+        </a>
+
+        <a class="game-card" href="./MineCrash/index.html">
+            <img class="game-thumb" src="./MineCrash/steve.png" alt="MineCrash">
+            <div class="game-title">MineCrash</div>
+        </a>
+
+        <a class="game-card" href="./RocketShooter/index.html">
+            <img class="game-thumb" src="./RocketShooter/assets/ships.png" alt="Rocket Shooter">
+            <div class="game-title">Rocket Shooter</div>
+        </a>
+
     </div>
 
 </body>
