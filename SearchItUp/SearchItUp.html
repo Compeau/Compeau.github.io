@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Search It Up</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #fafafa;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 80px;
+        color: #222;
+        transition: background 0.3s, color 0.3s;
+    }
+    body.dark {
+        background: #111;
+        color: #eee;
+    }
+    h1 {
+        font-weight: 300;
+        margin-bottom: 30px;
+    }
+    #searchBox {
+        width: 90%;
+        max-width: 600px;
+        padding: 14px;
+        font-size: 18px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        outline: none;
+        background: white;
+        color: #222;
+        transition: background 0.3s, color 0.3s, border-color 0.3s;
+    }
+    body.dark #searchBox {
+        background: #222;
+        color: #eee;
+        border-color: #555;
+    }
+    #searchBtn {
+        margin-top: 15px;
+        padding: 12px 22px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        background: #0078ff;
+        color: white;
+        cursor: pointer;
+    }
+    #toggleDark {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 8px 14px;
+        font-size: 14px;
+        border: none;
+        border-radius: 6px;
+        background: #444;
+        color: white;
+        cursor: pointer;
+    }
+    body.dark #toggleDark {
+        background: #ddd;
+        color: #111;
+    }
+    #results {
+        margin-top: 40px;
+        width: 90%;
+        max-width: 700px;
+    }
+    .result {
+        background: white;
+        padding: 16px;
+        margin-bottom: 12px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        transition: background 0.3s, color 0.3s, border-color 0.3s;
+    }
+    body.dark .result {
+        background: #222;
+        color: #eee;
+        border-color: #444;
+    }
+    .result a {
+        font-size: 18px;
+        color: #0078ff;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+
+<button id="toggleDark">Dark Mode</button>
+
+<h1>Search It Up</h1>
+
+<input id="searchBox" type="text" placeholder="Search the web…">
+<button id="searchBtn">Search</button>
+
+<div id="results"></div>
+
+<script>
+// -----------------------------
+// INSERT YOUR API KEY HERE
+// -----------------------------
+const API_KEY = "keiro_6lf8lxv266z4eqqhh6xch2ea2czocnpml7bx2lz6";
+
+// Keirolabs Lite Search Endpoint
+const SEARCH_URL = "https://api.keirolabs.com/search/lite";
+
+// -----------------------------
+// AUTO DARK MODE + TOGGLE
+// -----------------------------
+const toggleBtn = document.getElementById("toggleDark");
+
+// Check if user has a saved preference
+const savedPref = localStorage.getItem("darkMode");
+
+// If user has never toggled, follow system theme
+if (savedPref === null) {
+    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (systemPrefersDark) {
+        document.body.classList.add("dark");
+        toggleBtn.textContent = "Light Mode";
+    }
+} else {
+    // User preference overrides system
+    if (savedPref === "true") {
+        document.body.classList.add("dark");
+        toggleBtn.textContent = "Light Mode";
+    }
+}
+
+// Listen for system theme changes (optional but nice)
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
+    // Only auto-switch if user has NOT manually chosen
+    if (localStorage.getItem("darkMode") === null) {
+        if (e.matches) {
+            document.body.classList.add("dark");
+            toggleBtn.textContent = "Light Mode";
+        } else {
+            document.body.classList.remove("dark");
+            toggleBtn.textContent = "Dark Mode";
+        }
+    }
+});
+
+// Manual toggle
+toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    const isDark = document.body.classList.contains("dark");
+    toggleBtn.textContent = isDark ? "Light Mode" : "Dark Mode";
+    localStorage.setItem("darkMode", isDark);
+});
+
+// -----------------------------
+// SEARCH FUNCTION
+// -----------------------------
+document.getElementById("searchBtn").addEventListener("click", () => {
+    const query = document.getElementById("searchBox").value.trim();
+    if (!query) return;
+    search(query);
+});
+
+async function search(query) {
+    const resultsDiv = document.getElementById("results");
+    resultsDiv.innerHTML = "<p>Searching…</p>";
+
+    try {
+        const response = await fetch(SEARCH_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${API_KEY}`
+            },
+            body: JSON.stringify({
+                q: query,
+                n_tokens: 2048
+            })
+        });
+
+        const data = await response.json();
+
+        if (!data.results || data.results.length === 0) {
+            resultsDiv.innerHTML = "<p>No results found.</p>";
+            return;
+        }
+
+        resultsDiv.innerHTML = "";
+
+        data.results.forEach(r => {
+            const div = document.createElement("div");
+            div.className = "result";
+
+            div.innerHTML = `
+                <a href="${r.url}" target="_blank">${r.title || r.url}</a>
+                <p>${r.snippet || ""}</p>
+            `;
+
+            resultsDiv.appendChild(div);
+        });
+
+    } catch (err) {
+        resultsDiv.innerHTML = "<p>Error fetching results.</p>";
+        console.error(err);
+    }
+}
+</script>
+
+</body>
+</html>
